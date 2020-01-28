@@ -1,6 +1,6 @@
-Package: leaflet
+Package: leaflet.custom
 Type: Package
-Title: Create Interactive Web Maps with the JavaScript 'Leaflet' Library
+Title: Custom 'Leaflet' by Micah Wilhelm
 Version: 2.0.3.9000
 Authors@R: c(
       person("Joe", "Cheng", email = "joe@rstudio.com", role = c("aut", "cre")),
@@ -26,10 +26,8 @@ Authors@R: c(
       person("Michael Bostock", role = c("ctb", "cph"), comment = "topojson"),
       person("RStudio", role = c("cph"))
     )
-Description: Create and customize interactive maps using the 'Leaflet'
-    JavaScript library and the 'htmlwidgets' package. These maps can be used
-    directly from the R console, from 'RStudio', in Shiny applications and R Markdown
-    documents.
+Description: Customised 'Leaflet' library and 'htmlwidgets' package. Modified to allow
+    the simultaneous use of leafletproxy and value-based markerclusters.
 License: GPL-3
 URL: http://rstudio.github.io/leaflet/
 BugReports: https://github.com/rstudio/leaflet/issues

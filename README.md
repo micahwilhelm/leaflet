@@ -6,8 +6,8 @@
 interactive maps. This R package makes it easy to create Leaflet maps from R.
 
 ```r
-library(leaflet)
-m = leaflet() %>% addTiles()
+library(leaflet.custom)
+m = leaflet.custom() %>% addTiles()
 m  # a map with the default OSM tile layer
 
 m = m %>% setView(-93.65, 42.0285, zoom = 17)
@@ -22,11 +22,11 @@ You can install this package from CRAN, or the development version from GitHub:
 
 ```r
 # CRAN version
-install.packages('leaflet')
+# install.packages('leaflet')
 
 # Or Github version
 if (!require('devtools')) install.packages('devtools')
-devtools::install_github('rstudio/leaflet')
+devtools::install_github('micahwilhelm/leaflet.custom')
 ```
 
 ## Documentation
