@@ -503,7 +503,7 @@ L.MarkerClusterGroup = L.FeatureGroup.extend({
 	//Overrides LayerGroup.getLayer, WARNING: Really bad performance
 	getLayer: function (id) {
 		var result = null;
-		
+
 		id = parseInt(id, 10);
 
 		this.eachLayer(function (l) {
@@ -717,7 +717,7 @@ L.MarkerClusterGroup = L.FeatureGroup.extend({
 		}
 		delete e.target.__dragStart;
 	},
-	
+
 
 	//Internal function for removing a marker from everything.
 	//dontUpdateMap: set to true if you will handle updating the map manually (for bulk functions)
@@ -806,8 +806,8 @@ L.MarkerClusterGroup = L.FeatureGroup.extend({
 		return L.FeatureGroup.prototype.listens.call(this, type, propagate) || L.FeatureGroup.prototype.listens.call(this, 'cluster' + type, propagate);
 	},
 
-	//Default functionality
-	_defaultIconCreateFunction: function (cluster) {
+	//Default functionality MW modified to use centre and outline values depending on mode
+/*	_defaultIconCreateFunction: function (cluster) {
 		var childCount = cluster.getChildCount();
 
 		var c = ' marker-cluster-';
@@ -820,6 +820,108 @@ L.MarkerClusterGroup = L.FeatureGroup.extend({
 		}
 
 		return new L.DivIcon({ html: '<div><span>' + childCount + '</span></div>', className: 'marker-cluster' + c, iconSize: new L.Point(40, 40) });
+	},
+*/
+	_defaultIconCreateFunction: function (cluster) {
+    var markers = cluster.getAllChildMarkers();
+    if (typeof markers[0].options.mode !== 'undefined') {
+      var mode = markers[0].options.mode;
+    } else {
+      var mode = 'default'
+    }
+    if (mode == 'default') {
+      var childCount = cluster.getChildCount();
+
+	  	var c = ' marker-cluster-';
+	  	if (childCount < 10) {
+	  		c += 'small';
+	  	} else if (childCount < 100) {
+	  		c += 'medium';
+	  	} else {
+	  		c += 'large';
+	  	}
+
+	  	return new L.DivIcon({ html: '<div><span>' + childCount + '</span></div>', className: 'marker-cluster' + c, iconSize: new L.Point(40, 40) });
+    } else if (mode == 'twd') {
+      var nancount   = 0;
+      var centre_sum = 0;
+      var outline_sum  = 0;
+      for (i = 0; i < markers.length; i++) {
+        if (Number(markers[i].options.centre_status) != -1000) {
+          centre_sum += Number(markers[i].options.centre_status);
+          outline_sum += Number(markers[i].options.outline_status);
+        } else {
+          nancount += 1; } }
+      var centre_avg = Number.parseFloat(centre_sum/(markers.length-nancount)).toPrecision(3);
+      var outline_avg  = Number.parseFloat(outline_sum/(markers.length-nancount)).toPrecision(3);
+      var c = ' ';
+      if (outline_avg >= 0.667) {
+        c += 'marker-outline-frost '; }
+      if (isNaN(centre_avg)) {
+        c += 'marker-twd-na'; centre_avg = 'NA';
+      } else if (centre_avg >= 1.333) {
+        c += 'marker-twd-c1';
+      } else if (centre_avg >= 0.667 & centre_avg < 1.333) {
+        c += 'marker-twd-c2';
+      } else if (centre_avg > -1 & centre_avg < 0.667) {
+        c += 'marker-twd-c3';
+      }
+
+      return new L.DivIcon({ html: '<div><span></span></div>', className: 'marker-cluster' + c, iconSize: new L.Point(40, 40) });
+    } else if (mode == 'gro') {
+      var nancount   = 0;
+      var centre_sum = 0;
+      for (i = 0; i < markers.length; i++) {
+        if (Number(markers[i].options.centre_status) != -1000) {
+          centre_sum += Number(markers[i].options.centre_status);
+        } else {
+          nancount += 1; } }
+      var centre_avg = Number.parseFloat(centre_sum/(markers.length-nancount)).toPrecision(3);
+      var c = ' marker-';
+      if (isNaN(centre_avg)) {
+        c += 'gro-na'; centre_avg = 'NA';
+      } else if (centre_avg >= 1.333) {
+        c += 'gro-c1';
+      } else if (centre_avg >= 0.667 & centre_avg < 1.333) {
+        c += 'gro-c2';
+      } else if (centre_avg > 0 & centre_avg < 0.667) {
+        c += 'gro-c3';
+      } else if (centre_avg == 0) {
+        c += 'gro-c4';
+      }
+
+      return new L.DivIcon({ html: '<div><span></span></div>', className: 'marker-cluster' + c, iconSize: new L.Point(40, 40) });
+    } else if (mode == 'ssi') {
+      var nancount   = 0;
+      var centre_sum = 0;
+      for (i = 0; i < markers.length; i++) {
+        if (Number(markers[i].options.centre_status) != -1000) {
+          centre_sum += Number(markers[i].options.centre_status);
+        } else {
+          nancount += 1; } }
+      var centre_avg = Number.parseFloat(centre_sum/(markers.length-nancount)).toPrecision(3);
+      var c = ' marker-';
+      if (isNaN(centre_avg)) {
+        c += 'ssi-na'; centre_avg = 'NA';
+      } else if (centre_avg >= 67) {
+        c += 'ssi-c1';
+      } else if (centre_avg >= 33 & centre_avg < 67) {
+        c += 'ssi-c2';
+      } else if (centre_avg > 0 & centre_avg < 33) {
+        c += 'ssi-c3';
+      } else if (centre_avg == 0) {
+        c += 'ssi-c4';
+      }
+
+      return new L.DivIcon({ html: '<div><span></span></div>', className: 'marker-cluster' + c, iconSize: new L.Point(40, 40) });
+    } else if (mode == 'lwf') {
+      var centre_avg = markers.length;
+      var c = ' marker-';
+      c += 'lwf-na'; centre_avg = 'NA';
+
+      return new L.DivIcon({ html: '<div><span></span></div>', className: 'marker-cluster' + c, iconSize: new L.Point(40, 40) });
+    }
+    // return new L.DivIcon({ html: '<div style=\"background-color:' + bkg + '\"><span></span></div>', className: 'marker-cluster' +c, iconSize: new L.Point(40, 40) }); }
 	},
 
 	_bindEvents: function () {
@@ -931,7 +1033,7 @@ L.MarkerClusterGroup = L.FeatureGroup.extend({
 			minZoom = Math.floor(this._map.getMinZoom()),
 			radius = this.options.maxClusterRadius,
 			radiusFn = radius;
-	
+
 		//If we just set maxClusterRadius to a single number, we need to create
 		//a simple function to return that number. Otherwise, we just have to
 		//use the function we've passed in.
@@ -945,7 +1047,7 @@ L.MarkerClusterGroup = L.FeatureGroup.extend({
 		this._maxZoom = maxZoom;
 		this._gridClusters = {};
 		this._gridUnclustered = {};
-	
+
 		//Set up DistanceGrids for each zoom
 		for (var zoom = maxZoom; zoom >= minZoom; zoom--) {
 			this._gridClusters[zoom] = new L.DistanceGrid(radiusFn(zoom));
@@ -1779,26 +1881,26 @@ L.MarkerCluster = L.Marker.extend({
 
 /*
 * Extends L.Marker to include two extra methods: clusterHide and clusterShow.
-* 
+*
 * They work as setOpacity(0) and setOpacity(1) respectively, but
 * they will remember the marker's opacity when hiding and showing it again.
-* 
+*
 */
 
 
 L.Marker.include({
-	
+
 	clusterHide: function () {
 		this.options.opacityWhenUnclustered = this.options.opacity || 1;
 		return this.setOpacity(0);
 	},
-	
+
 	clusterShow: function () {
 		var ret = this.setOpacity(this.options.opacity || this.options.opacityWhenUnclustered);
 		delete this.options.opacityWhenUnclustered;
 		return ret;
 	}
-	
+
 });
 
 
@@ -2059,7 +2161,7 @@ Retrieved from: http://en.literateprograms.org/Quickhull_(Javascript)?oldid=1843
 					minLng = pt.lng;
 				}
 			}
-			
+
 			if (minLat !== maxLat) {
 				minPt = minLatPt;
 				maxPt = maxLatPt;
@@ -2324,7 +2426,7 @@ L.MarkerCluster.include({
 			if (m.clusterHide) {
 				m.clusterHide();
 			}
-			
+
 			// Vectors just get immediately added
 			fg.addLayer(m);
 
@@ -2344,7 +2446,7 @@ L.MarkerCluster.include({
 			//Move marker to new position
 			m._preSpiderfyLatlng = m._latlng;
 			m.setLatLng(newPos);
-			
+
 			if (m.clusterShow) {
 				m.clusterShow();
 			}
