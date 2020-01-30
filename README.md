@@ -22,11 +22,11 @@ You can install this package from CRAN, or the development version from GitHub:
 
 ```r
 # CRAN version
-install.packages('leaflet')
+# install.packages('leaflet')
 
 # Or Github version
 if (!require('devtools')) install.packages('devtools')
-devtools::install_github('rstudio/leaflet')
+devtools::install_github('micahwilhelm/leaflet')
 ```
 
 ## Documentation

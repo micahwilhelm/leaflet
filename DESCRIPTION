@@ -1,6 +1,6 @@
 Package: leaflet
 Type: Package
-Title: Custom 'Leaflet' package by Micah Wilhelm
+Title: Custom 'Leaflet' by Micah Wilhelm
 Version: 2.0.3.9000
 Authors@R: c(
       person("Joe", "Cheng", email = "joe@rstudio.com", role = c("aut", "cre")),
@@ -27,8 +27,9 @@ Authors@R: c(
       person("RStudio", role = c("cph"))
     )
 Description: Create and customize interactive maps using the 'Leaflet'
-    JavaScript library and a modified 'htmlwidgets' package. The 'leaflet.markers.js was
-    hardcoded to assign cluster colours based on average marker values passed from leaflet.
+    JavaScript library and a modified 'htmlwidgets' package. The leaflet.markercluster.js was
+    hardcoded to assign cluster colours based on average marker values passed from leaflet
+    (centre_status, outline_status) depending on mode.
 License: GPL-3
 URL: http://rstudio.github.io/leaflet/
 BugReports: https://github.com/rstudio/leaflet/issues
