@@ -841,7 +841,7 @@ L.MarkerClusterGroup = L.FeatureGroup.extend({
 	  		c += 'large';
 	  	}
 
-	  	return new L.DivIcon({ html: '<div><span>' + childCount + '</span></div>', className: 'marker-cluster' + c, iconSize: new L.Point(40, 40) });
+	  	return new L.DivIcon({ html: '<div><span>' + childCount + '</span></div>', className: 'marker-cluster' + c, iconSize: new L.Point(32, 32) });
     } else if (mode == 'twd') {
       var nancount   = 0;
       var centre_sum = 0;
@@ -867,7 +867,7 @@ L.MarkerClusterGroup = L.FeatureGroup.extend({
         c += 'marker-twd-c3';
       }
 
-      return new L.DivIcon({ html: '<div><span></span></div>', className: 'marker-cluster' + c, iconSize: new L.Point(40, 40) });
+      return new L.DivIcon({ html: '<div><span></span></div>', className: 'marker-cluster' + c, iconSize: new L.Point(32, 32) });
     } else if (mode == 'gro') {
       var nancount   = 0;
       var centre_sum = 0;
@@ -890,7 +890,7 @@ L.MarkerClusterGroup = L.FeatureGroup.extend({
         c += 'gro-c4';
       }
 
-      return new L.DivIcon({ html: '<div><span></span></div>', className: 'marker-cluster' + c, iconSize: new L.Point(40, 40) });
+      return new L.DivIcon({ html: '<div><span></span></div>', className: 'marker-cluster' + c, iconSize: new L.Point(32, 32) });
     } else if (mode == 'ssi') {
       var nancount   = 0;
       var centre_sum = 0;
@@ -913,15 +913,15 @@ L.MarkerClusterGroup = L.FeatureGroup.extend({
         c += 'ssi-c4';
       }
 
-      return new L.DivIcon({ html: '<div><span></span></div>', className: 'marker-cluster' + c, iconSize: new L.Point(40, 40) });
+      return new L.DivIcon({ html: '<div><span></span></div>', className: 'marker-cluster' + c, iconSize: new L.Point(32, 32) });
     } else if (mode == 'lwf') {
       var centre_avg = markers.length;
       var c = ' marker-';
       c += 'lwf-na'; centre_avg = 'NA';
 
-      return new L.DivIcon({ html: '<div><span></span></div>', className: 'marker-cluster' + c, iconSize: new L.Point(40, 40) });
+      return new L.DivIcon({ html: '<div><span></span></div>', className: 'marker-cluster' + c, iconSize: new L.Point(32, 32) });
     }
-    // return new L.DivIcon({ html: '<div style=\"background-color:' + bkg + '\"><span></span></div>', className: 'marker-cluster' +c, iconSize: new L.Point(40, 40) }); }
+    // return new L.DivIcon({ html: '<div style=\"background-color:' + bkg + '\"><span></span></div>', className: 'marker-cluster' +c, iconSize: new L.Point(30, 30) }); }
 	},
 
 	_bindEvents: function () {
