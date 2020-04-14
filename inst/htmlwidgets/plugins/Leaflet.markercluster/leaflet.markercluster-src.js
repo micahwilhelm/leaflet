@@ -880,11 +880,11 @@ L.MarkerClusterGroup = L.FeatureGroup.extend({
       var c = ' marker-';
       if (isNaN(centre_avg)) {
         c += 'gro-na'; centre_avg = 'NA';
-      } else if (centre_avg >= 1.333) {
+      } else if (centre_avg >= 2.333) {
         c += 'gro-c1';
-      } else if (centre_avg >= 0.667 & centre_avg < 1.333) {
+      } else if (centre_avg >= 1.667 & centre_avg < 2.333) {
         c += 'gro-c2';
-      } else if (centre_avg > 0 & centre_avg < 0.667) {
+      } else if (centre_avg > 0 & centre_avg < 1.667) {
         c += 'gro-c3';
       } else if (centre_avg == 0) {
         c += 'gro-c4';
