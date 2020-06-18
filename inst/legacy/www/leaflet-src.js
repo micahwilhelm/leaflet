@@ -3593,7 +3593,7 @@ L.Marker = L.Class.extend({
 			if (options.title) {
 				icon.title = options.title;
 			}
-			
+
 			if (options.alt) {
 				icon.alt = options.alt;
 			}
@@ -8100,13 +8100,13 @@ L.control.zoom = function (options) {
 
 
 /*
- * L.Control.Attribution is used for displaying attribution on the map (added by default).
+ * L.Control.Attribution is used for displaying attribution on the map (added by default). MW: disabled leaflet prefix
  */
 
 L.Control.Attribution = L.Control.extend({
 	options: {
 		position: 'bottomright',
-		prefix: '<a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>'
+		prefix: '<a href="https://www.wsl.ch" title="NCCS contributor">WSL</a>'
 	},
 
 	initialize: function (options) {
@@ -8124,7 +8124,7 @@ L.Control.Attribution = L.Control.extend({
 				this.addAttribution(map._layers[i].getAttribution());
 			}
 		}
-		
+
 		map
 		    .on('layeradd', this._onLayerAdd, this)
 		    .on('layerremove', this._onLayerRemove, this);
