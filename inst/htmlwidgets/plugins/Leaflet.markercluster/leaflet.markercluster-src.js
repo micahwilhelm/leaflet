@@ -890,7 +890,7 @@ L.MarkerClusterGroup = L.FeatureGroup.extend({
         c += 'gro-c4';
       }
 
-      return new L.DivIcon({ html: '<div><span></span></div>', className: 'marker-cluster' + c, iconSize: new L.Point(32, 32) });
+      return new L.DivIcon({ html: '<div><span>' + centre_avg + '</span></div>', className: 'marker-cluster' + c, iconSize: new L.Point(32, 32) });
     } else if (mode == 'ssi') {
       var nancount   = 0;
       var centre_sum = 0;
