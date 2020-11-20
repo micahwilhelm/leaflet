@@ -854,19 +854,19 @@ L.MarkerClusterGroup = L.FeatureGroup.extend({
           nancount += 1; } }
       var centre_avg = Number.parseFloat(centre_sum/(markers.length-nancount)).toPrecision(3);
       var outline_avg  = Number.parseFloat(outline_sum/(markers.length-nancount)).toPrecision(3);
-      var c = ' marker-';
+      var c = ' ';
       if (outline_avg >= 0.667) {
-        c += 'outline-frost '; }
+        c += 'marker-outline-frost '; }
       if (isNaN(centre_avg)) {
-        c += 'twd-na'; centre_avg = 'NA';
+        c += 'marker-twd-na'; centre_avg = 'NA';
       } else if (centre_avg >= 2.333) {
-        c += 'twd-c1';
+        c += 'marker-twd-c1';
       } else if (centre_avg >= 1.667 & centre_avg < 2.333) {
-        c += 'twd-c2';
+        c += 'marker-twd-c2';
       } else if (centre_avg > 0 & centre_avg < 1.667) {
-        c += 'twd-c3';
+        c += 'marker-twd-c3';
       } else if (centre_avg == 0) {
-        c += 'twd-c4';
+        c += 'marker-twd-c4';
       }
 
       return new L.DivIcon({ html: '<div><span></span></div>', className: 'marker-cluster' + c, iconSize: new L.Point(32, 32) });
@@ -882,19 +882,19 @@ L.MarkerClusterGroup = L.FeatureGroup.extend({
           nancount += 1; } }
       var centre_avg = Number.parseFloat(centre_sum/(markers.length-nancount)).toPrecision(3);
       var outline_avg  = Number.parseFloat(outline_sum/(markers.length-nancount)).toPrecision(3);
-      var c = ' marker-';
+      var c = ' ';
          if (outline_avg >= 0.667) {
-        c += 'outline-sleep '; }
+        c += 'marker-outline-sleep '; }
       if (isNaN(centre_avg)) {
-        c += 'gro-na'; centre_avg = 'NA';
+        c += 'marker-gro-na'; centre_avg = 'NA';
       } else if (centre_avg >= 2.333) {
-        c += 'gro-c1';
+        c += 'marker-gro-c1';
       } else if (centre_avg >= 1.667 & centre_avg < 2.333) {
-        c += 'gro-c2';
+        c += 'marker-gro-c2';
       } else if (centre_avg > 0 & centre_avg < 1.667) {
-        c += 'gro-c3';
+        c += 'marker-gro-c3';
       } else if (centre_avg == 0) {
-        c += 'gro-c4';
+        c += 'marker-gro-c4';
       }
 
       return new L.DivIcon({ html: '<div><span></span></div>', className: 'marker-cluster' + c, iconSize: new L.Point(32, 32) });
