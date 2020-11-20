@@ -884,7 +884,7 @@ L.MarkerClusterGroup = L.FeatureGroup.extend({
       var outline_avg  = Number.parseFloat(outline_sum/(markers.length-nancount)).toPrecision(3);
       var c = ' marker-';
          if (outline_avg >= 0.667) {
-        c += 'outline-dormant '; }
+        c += 'outline-sleep '; }
       if (isNaN(centre_avg)) {
         c += 'gro-na'; centre_avg = 'NA';
       } else if (centre_avg >= 2.333) {
