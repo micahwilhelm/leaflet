@@ -854,30 +854,37 @@ L.MarkerClusterGroup = L.FeatureGroup.extend({
           nancount += 1; } }
       var centre_avg = Number.parseFloat(centre_sum/(markers.length-nancount)).toPrecision(3);
       var outline_avg  = Number.parseFloat(outline_sum/(markers.length-nancount)).toPrecision(3);
-      var c = ' ';
+      var c = ' marker-';
       if (outline_avg >= 0.667) {
-        c += 'marker-outline-frost '; }
+        c += 'outline-frost '; }
       if (isNaN(centre_avg)) {
-        c += 'marker-twd-na'; centre_avg = 'NA';
-      } else if (centre_avg >= 1.333) {
-        c += 'marker-twd-c1';
-      } else if (centre_avg >= 0.667 & centre_avg < 1.333) {
-        c += 'marker-twd-c2';
-      } else if (centre_avg > -1 & centre_avg < 0.667) {
-        c += 'marker-twd-c3';
+        c += 'twd-na'; centre_avg = 'NA';
+      } else if (centre_avg >= 2.333) {
+        c += 'twd-c1';
+      } else if (centre_avg >= 1.667 & centre_avg < 2.333) {
+        c += 'twd-c2';
+      } else if (centre_avg > 0 & centre_avg < 1.667) {
+        c += 'twd-c3';
+      } else if (centre_avg == 0) {
+        c += 'twd-c4';
       }
 
       return new L.DivIcon({ html: '<div><span></span></div>', className: 'marker-cluster' + c, iconSize: new L.Point(32, 32) });
     } else if (mode == 'gro') {
       var nancount   = 0;
       var centre_sum = 0;
+      var outline_sum  = 0;
       for (i = 0; i < markers.length; i++) {
         if (Number(markers[i].options.centre_status) != -1000) {
           centre_sum += Number(markers[i].options.centre_status);
+          outline_sum += Number(markers[i].options.outline_status);
         } else {
           nancount += 1; } }
       var centre_avg = Number.parseFloat(centre_sum/(markers.length-nancount)).toPrecision(3);
+      var outline_avg  = Number.parseFloat(outline_sum/(markers.length-nancount)).toPrecision(3);
       var c = ' marker-';
+         if (outline_avg >= 0.667) {
+        c += 'outline-dormant '; }
       if (isNaN(centre_avg)) {
         c += 'gro-na'; centre_avg = 'NA';
       } else if (centre_avg >= 2.333) {
@@ -890,7 +897,7 @@ L.MarkerClusterGroup = L.FeatureGroup.extend({
         c += 'gro-c4';
       }
 
-      return new L.DivIcon({ html: '<div><span>' + centre_avg + '</span></div>', className: 'marker-cluster' + c, iconSize: new L.Point(32, 32) });
+      return new L.DivIcon({ html: '<div><span></span></div>', className: 'marker-cluster' + c, iconSize: new L.Point(32, 32) });
     } else if (mode == 'ssi') {
       var nancount   = 0;
       var centre_sum = 0;
