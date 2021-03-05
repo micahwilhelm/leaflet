@@ -13,6 +13,7 @@
 \alias{addPolylines}
 \alias{addRectangles}
 \alias{addPolygons}
+\alias{setShapeStyle}
 \alias{addGeoJSON}
 \alias{addTopoJSON}
 \title{Graphics elements and layers}
@@ -229,6 +230,11 @@ addPolygons(
   data = getMapData(map)
 )
 
+setShapeStyle(map, data = getMapData(map), layerId, stroke = NULL,
+  color = NULL, weight = NULL, opacity = NULL, fill = NULL,
+  fillColor = NULL, fillOpacity = NULL, dashArray = NULL,
+  smoothFactor = NULL, noClip = NULL, options = NULL)
+
 addGeoJSON(
   map,
   geojson,
@@ -408,6 +414,8 @@ Add graphics elements and layers to the map widget.
 \item \code{addRectangles}: Add rectangles to the map
 
 \item \code{addPolygons}: Add polygons to the map
+
+\item \code{setShapeStyle}: Change style of rendered layers (leafletproxy)
 
 \item \code{addGeoJSON}: Add GeoJSON layers to the map
 
