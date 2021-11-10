@@ -847,7 +847,7 @@ L.MarkerClusterGroup = L.FeatureGroup.extend({
       var centre_sum = 0;
       var outline_sum  = 0;
       for (i = 0; i < markers.length; i++) {
-        if (Number(markers[i].options.centre_status) != -1000) {
+        if (Number(markers[i].options.centre_status) != -1) {
           centre_sum += Number(markers[i].options.centre_status);
           outline_sum += Number(markers[i].options.outline_status);
         } else {
@@ -875,7 +875,7 @@ L.MarkerClusterGroup = L.FeatureGroup.extend({
       var centre_sum = 0;
       var outline_sum  = 0;
       for (i = 0; i < markers.length; i++) {
-        if (Number(markers[i].options.centre_status) != -1000) {
+        if (Number(markers[i].options.centre_status) != -1) {
           centre_sum += Number(markers[i].options.centre_status);
           outline_sum += Number(markers[i].options.outline_status);
         } else {
